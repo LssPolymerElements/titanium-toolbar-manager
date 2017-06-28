@@ -1,0 +1,33 @@
+﻿<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer2-ts/polymer2-ts.html">
+<link rel="import" href="../neon-animation/neon-animated-pages.html">
+<link rel="import" href="../neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../neon-animation/animations/fade-out-animation.html">
+
+<dom-module id="titanium-toolbar-manager">
+    <template>
+        <style>
+             :host {
+                position: relative;
+                height: 64px;
+                display: block;
+            }
+        </style>
+        <neon-animated-pages id="pages" selected="[[activeToolbarName]]" attr-for-selected="name" entry-animation="fade-in-animation"
+            exit-animation="fade-out-animation">
+            <neon-animatable name="main">
+                <slot name="main"></slot>
+            </neon-animatable>
+            <neon-animatable name="search">
+                <slot name="search"></slot>
+            </neon-animatable>
+            <neon-animatable name="selected">
+                <slot name="selected"></slot>
+            </neon-animatable>
+            <neon-animatable name="detail">
+                <slot name="detail"></slot>
+            </neon-animatable>
+        </neon-animated-pages>
+    </template>
+    <script src="./titanium-toolbar-manager.js"></script>
+</dom-module>

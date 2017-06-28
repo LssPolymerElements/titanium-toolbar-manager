@@ -1,0 +1,254 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../iron-icon/iron-icon.html" />
+<link rel="import" href="../titanium-toolbar-manager.html">
+<link rel="import" href="../titanium-toolbar-icons.html">
+<link rel="import" href="./my-icons.html">
+
+
+<dom-module id="titanium-toolbar-manager-demo">
+    <template>
+        <style>
+             :host {
+                display: block;
+                --app-primary-color: var(--paper-blue-grey-500);
+                --app-light-primary-color: var(--paper-blue-grey-100);
+                --primary-color: var(--app-primary-color);
+                --default-primary-color: var(--app-primary-color);
+                --app-secondary-color: var(--paper-orange-a400);
+                --app-text-primary-color: #fff;
+                --app-text-secondary-color: var(--paper-grey-700);
+            }
+
+            .no-flex-icon {
+                min-width: 40px;
+            }
+
+            .main-title {
+                @apply --paper-font-common-nowrap;
+            }
+
+            .light-toolbar {
+                background-color: var(--app-light-primary-color);
+                color: var(--app-text-secondary-color);
+            }
+
+            .fixed-width-wrapper {
+                @apply --layout-flex;
+                @apply --layout-horizontal;
+                padding: 0 4px;
+            }
+
+            .fixed-width-container {
+                @apply --layout-horizontal;
+            }
+
+            .flex {
+                @apply --layout-flex;
+            }
+
+            .search-container>iron-icon {
+                color: var(--paper-grey-900);
+                padding: 0 16px;
+            }
+
+            .search-container>input,
+            .search-container>input:focus {
+                color: var(--paper-grey-900);
+                @apply --paper-font-body1;
+                @apply --layout-flex-auto;
+                outline: none;
+                border: 0;
+                font-size: 16px;
+            }
+
+            .toolbar-back-button {
+                margin-right: 8px;
+            }
+
+            .toolbar-labels {
+                padding-right: 8px;
+            }
+
+            .toolbar-selected-count {
+                @apply --layout-flex-2;
+                @apply --layout-horizontal;
+                font-size: 18px;
+                @apply --layout-center;
+                color: var(--paper-blue-800);
+                margin-left: 16px;
+                padding-top: 3px;
+            }
+
+            .toolbar-selected-count-number {
+                margin-right: 4px;
+            }
+
+            @media screen and (max-width: 766px) {
+                .max-width-container {
+                    padding: 0;
+                }
+            }
+
+            @media (min-width: 737px) {
+                .fixed-width-wrapper {
+                    @apply --layout-center;
+                    @apply --layout-center-justified;
+                }
+                .fixed-width-container {
+                    @apply --layout-horizontal;
+                    @apply --layout-center;
+                    @apply --layout-flex-auto;
+                    max-width: 1200px;
+                    width: 100%;
+                    margin-right: 40px;
+                }
+                .fixed-width-container[opened] {
+                    margin-left: 110px;
+                    margin-right: 0;
+                }
+
+                .search-container {
+                    background-color: #fff;
+                }
+            }
+
+            @media (max-width: 1600px) {
+                .fixed-width-container {
+                    margin-right: 0;
+                }
+            }
+
+            @media (max-width: 736px) {
+                .toolbar-labels {
+                    display: none;
+                }
+
+                .toolbar-flex-placeholder {
+                    display: none;
+                }
+
+                .toolbar-selected-count {
+                    margin-left: 0;
+                }
+
+                .search-container>input,
+                .search-container>input:focus {
+                    background-color: #fff;
+                    @apply --layout-flex-auto;
+                    font-size: 18px;
+                }
+
+                .selected-text,
+                .search-container>iron-icon {
+                    display: none;
+                }
+                .fixed-width-container {
+                    @apply --layout-flex-auto;
+                }
+
+                .light-toolbar {
+                    background-color: #fff;
+                }
+            }
+        </style>
+        <titanium-toolbar-manager active-toolbar-name="{{activeToolbarName}}" id="toolbarManager" search-term="{{searchTerm}}">
+            <app-toolbar slot="main" id="mainToolbar" name="main">
+                <paper-icon-button class="no-flex-icon" id="toggleDrawerButton" icon="my-icons:menu"></paper-icon-button>
+                <div class="main-title">Main Toolbar</div>
+                <div class="fixed-width-wrapper">
+                    <div class="fixed-width-container" opened$="[[menuOpened]]">
+                        <div class="flex"></div>
+                        <titanium-toolbar-icons page="[[activeToolbarName]]"></titanium-toolbar-icons>
+                    </div>
+                </div>
+            </app-toolbar>
+            <app-toolbar slot="search" id="searchToolbar" name="search" class="light-toolbar">
+                <paper-icon-button class="toolbar-back-button no-flex-icon" action="searchBack" icon="my-icons:arrow-back"></paper-icon-button>
+                <div class="toolbar-labels">Back</div>
+                <div class="fixed-width-wrapper">
+                    <div class="fixed-width-container search-container" opened$="[[menuOpened]]">
+                        <iron-icon class="search-icon" icon="my-icons:search"></iron-icon>
+                        <input id="searchInput" is="iron-input" bind-value="{{searchRouteData.searchTerm}}" placeholder="Search" />
+                        <paper-icon-button id="clear" action="clearSearch" icon="my-icons:close"></paper-icon-button>
+                    </div>
+                </div>
+            </app-toolbar>
+            <app-toolbar slot="selected" id="selectedToolbar" name="selected" class="light-toolbar">
+                <paper-icon-button class="toolbar-back-button no-flex-icon" action="selectedBack" icon="my-icons:arrow-back"></paper-icon-button>
+                <div class="toolbar-labels">Back</div>
+                <div class="fixed-width-wrapper">
+                    <div class="fixed-width-container" opened$="[[menuOpened]]">
+                        <div class="toolbar-selected-count">
+                            <div class="toolbar-selected-count-number">[[selectedCount]]</div>
+                            <div class="selected-text">Selected</div>
+                        </div>
+                        <titanium-toolbar-icons page="[[activeToolbarName]]"></titanium-toolbar-icons>
+                    </div>
+                </div>
+            </app-toolbar>
+            <app-toolbar slot="detail" id="detailToolbar" name="detail" class="light-toolbar">
+                <paper-icon-button class="toolbar-back-button" action="detailBack" icon="my-icons:arrow-back"></paper-icon-button>
+                <div class="toolbar-labels">Back</div>
+                <titanium-toolbar-icons page="[[activeToolbarName]]" title="{{appTitle}}"></titanium-toolbar-icons>
+            </app-toolbar>
+        </titanium-toolbar-manager>
+    </template>
+    <script>
+        class TitaniumToolbarManagerDemo extends Polymer.Element {
+            static get is() {
+                return 'titanium-toolbar-manager-demo';
+            }
+
+            constructor() {
+                super();
+                this._searchListener = this.searchTapped.bind(this);
+                this._searchBackListener = this.searchBackTapped.bind(this);
+            }
+
+            ready() {
+                super.ready();
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+                window.addEventListener('searchTap', this._searchListener);
+                window.addEventListener('searchBackTap', this._searchBackListener);
+                this.$.toolbarManager.addIcon("main", new ToolbarIcon("search", "search", "main",
+                    "Search Icon Description"));
+            }
+
+            searchTapped(e) {
+                window.removeEventListener('searchTap', this._searchListener);
+                this.activeToolbarName = 'search';
+            }
+
+            searchBackTapped(e) {
+                this.activeToolbarName = 'main';
+            }
+
+            static get properties() {
+                return {
+                    searchTerm: {
+                        type: String,
+                        value: "Hello world!"
+                    },
+                    activeToolbarName: {
+                        type: String,
+                        value: "main"
+                    },
+                    _searchListener: {
+                        type: Object
+                    },
+                    _searchBackListener: {
+                        type: Object
+                    }
+                }
+            }
+
+        }
+        customElements.define(TitaniumToolbarManagerDemo.is, TitaniumToolbarManagerDemo);
+    </script>
+</dom-module>

@@ -23,7 +23,7 @@ class TitanimToolbarManager extends Polymer.Element {
     @property({ readOnly: true })
     private toolbarNames: Array<string> = ["main", "search", "selected", "detail"];
 
-    @listen('pages', 'tap')
+    @listen('tap', 'pages')
     onToolbarTapped(e: any) {
         let action = e.detail.sourceEvent.target.action
             || e.detail.sourceEvent.target.getAttribute("action")
@@ -34,7 +34,8 @@ class TitanimToolbarManager extends Polymer.Element {
             return;
         }
 
-        this.dispatchEvent(new CustomEvent(`${action}Tap`, { bubbles: true, composed: true }));
+        let options: any = { bubbles: true, composed: true };
+        this.dispatchEvent(new CustomEvent(`${action}Tap`, options));
     }
 
     addIcon(toolbarName: string, icon: any, position?: number) {

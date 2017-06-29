@@ -20,7 +20,8 @@ let TitanimToolbarManager = class TitanimToolbarManager extends Polymer.Element 
         if (!action) {
             return;
         }
-        this.dispatchEvent(new CustomEvent(`${action}Tap`, { bubbles: true, composed: true }));
+        let options = { bubbles: true, composed: true };
+        this.dispatchEvent(new CustomEvent(`${action}Tap`, options));
     }
     addIcon(toolbarName, icon, position) {
         var icons = this.getToolbarIcons(toolbarName);
@@ -89,7 +90,7 @@ __decorate([
     __metadata("design:type", Array)
 ], TitanimToolbarManager.prototype, "toolbarNames", void 0);
 __decorate([
-    listen('pages', 'tap'),
+    listen('tap', 'pages'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)

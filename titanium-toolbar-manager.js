@@ -53,7 +53,8 @@ let TitanimToolbarManager = class TitanimToolbarManager extends Polymer.Element 
     showToolbar(name) {
         this.activeToolbarName = name;
         if (name === "search") {
-            this.dispatchEvent(new CustomEvent('searchActivated'));
+            let options = { bubbles: true, composed: true };
+            this.dispatchEvent(new CustomEvent('searchActivated', options));
         }
     }
     reset() {

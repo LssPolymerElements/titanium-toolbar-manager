@@ -20,6 +20,7 @@ test_script:
 # Don't actually build.
 build: off
 
+skip_tags: true
 deploy:
 - provider: GitHub
   auth_token:

@@ -20,6 +20,7 @@ test_script:
 # Don't actually build.
 build: off
 
+version: 1.0.{build}
 skip_tags: true
 deploy:
 - provider: GitHub

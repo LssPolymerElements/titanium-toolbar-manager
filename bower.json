@@ -1,6 +1,6 @@
 {
   "name": "titanium-toolbar-manager",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A polymer 2 toolbar selector",
   "authors": [
     "Leavitt Software Solutions"
@@ -41,5 +41,8 @@
     "app-layout": "PolymerElements/app-layout#^2.0.0",
     "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^2.0.0",
     "iron-icon": "PolymerElements/iron-icon#^2.0.0"
+  },
+  "demos": {
+    "Demo": "demo/index.html"
   }
 }

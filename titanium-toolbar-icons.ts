@@ -1,4 +1,4 @@
-﻿@customElement("titanium-toolbar-icons")
+﻿@customElement('titanium-toolbar-icons')
 class TitaniumToolbarIcons extends Polymer.Element {
     @property()
     icons: Array<IToolbarIcon>;
@@ -23,12 +23,12 @@ class TitaniumToolbarIcons extends Polymer.Element {
         if (!this.icons) {
             this.icons = [];
         }
-        let isIconAlreadyAdded = this.icons.some(o => { return o.action === icon.action && o.pageName === icon.pageName });
+        let isIconAlreadyAdded = this.icons.some(o => { return o.action === icon.action && o.pageName === icon.pageName; });
         if (isIconAlreadyAdded)
             return;
 
-        if (typeof position !== "undefined") {
-            this.splice('icons', position, 0, icon)
+        if (typeof position !== 'undefined') {
+            this.splice('icons', position, 0, icon);
             return;
         }
         this.push('icons', icon);
@@ -38,19 +38,19 @@ class TitaniumToolbarIcons extends Polymer.Element {
         if (!this.icons) {
             this.icons = [];
         }
-        var icon = this.icons.filter(o => { return o.name === name })[0];
+        let icon = this.icons.filter(o => { return o.name === name; })[0];
         if (icon) {
-            var index = this.icons.indexOf(icon);
+            let index = this.icons.indexOf(icon);
             this.splice('icons', index, 1);
         }
     }
 }
 
 interface IToolbarIcon {
-    name: string,
-    action: string,
-    pageName: string,
-    description?: string
+    name: string;
+    action: string;
+    pageName: string;
+    description?: string;
 }
 
 class ToolbarIcon implements IToolbarIcon {
@@ -59,7 +59,7 @@ class ToolbarIcon implements IToolbarIcon {
         this.name = name;
         this.action = action;
         this.pageName = pageName;
-        this.description = description || "";
+        this.description = description || '';
     }
 
     name: string;

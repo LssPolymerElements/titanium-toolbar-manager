@@ -24,7 +24,7 @@ let TitaniumToolbarIcons = class TitaniumToolbarIcons extends Polymer.Element {
         let isIconAlreadyAdded = this.icons.some(o => { return o.action === icon.action && o.pageName === icon.pageName; });
         if (isIconAlreadyAdded)
             return;
-        if (typeof position !== "undefined") {
+        if (typeof position !== 'undefined') {
             this.splice('icons', position, 0, icon);
             return;
         }
@@ -34,9 +34,9 @@ let TitaniumToolbarIcons = class TitaniumToolbarIcons extends Polymer.Element {
         if (!this.icons) {
             this.icons = [];
         }
-        var icon = this.icons.filter(o => { return o.name === name; })[0];
+        let icon = this.icons.filter(o => { return o.name === name; })[0];
         if (icon) {
-            var index = this.icons.indexOf(icon);
+            let index = this.icons.indexOf(icon);
             this.splice('icons', index, 1);
         }
     }
@@ -56,13 +56,13 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], TitaniumToolbarIcons.prototype, "pageChanged", null);
 TitaniumToolbarIcons = __decorate([
-    customElement("titanium-toolbar-icons")
+    customElement('titanium-toolbar-icons')
 ], TitaniumToolbarIcons);
 class ToolbarIcon {
     constructor(name, action, pageName, description) {
         this.name = name;
         this.action = action;
         this.pageName = pageName;
-        this.description = description || "";
+        this.description = description || '';
     }
 }

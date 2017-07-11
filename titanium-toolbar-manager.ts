@@ -1,7 +1,7 @@
 ﻿declare var jwt_decode: any;
 
-@customElement("titanium-toolbar-manager")
-class TitanimToolbarManager extends Polymer.Element {
+@customElement('titanium-toolbar-manager')
+class TitaniumToolbarManager extends Polymer.Element {
     @property()
     mainToolbar: Element;
 
@@ -21,14 +21,14 @@ class TitanimToolbarManager extends Polymer.Element {
     searchTerm: string;
 
     @property({ readOnly: true })
-    private toolbarNames: Array<string> = ["main", "search", "selected", "detail"];
+    private toolbarNames: Array<string> = ['main', 'search', 'selected', 'detail'];
 
     @listen('tap', 'pages')
     onToolbarTapped(e: any) {
         let action = e.detail.sourceEvent.target.action
-            || e.detail.sourceEvent.target.getAttribute("action")
+            || e.detail.sourceEvent.target.getAttribute('action')
             || (e.detail.sourceEvent.target.parentElement && e.detail.sourceEvent.target.parentElement.action)
-            || (e.detail.sourceEvent.target.parentElement && e.detail.sourceEvent.target.parentElement.getAttribute("action"));
+            || (e.detail.sourceEvent.target.parentElement && e.detail.sourceEvent.target.parentElement.getAttribute('action'));
 
         if (!action) {
             return;
@@ -39,7 +39,7 @@ class TitanimToolbarManager extends Polymer.Element {
     }
 
     addIcon(toolbarName: string, icon: any, position?: number) {
-        var icons = this.getToolbarIcons(toolbarName);
+        let icons = this.getToolbarIcons(toolbarName);
         if (icons) {
             icons.addIcon(icon, position);
         } else {
@@ -48,7 +48,7 @@ class TitanimToolbarManager extends Polymer.Element {
     }
 
     removeIcon(toolbarName: string, name: string) {
-        var icons = this.getToolbarIcons(toolbarName);
+        let icons = this.getToolbarIcons(toolbarName);
         if (icons) {
             icons.removeIcon(name);
         } else {
@@ -62,15 +62,15 @@ class TitanimToolbarManager extends Polymer.Element {
             return null;
         }
 
-        var toolbar: any = this.querySelector(`[name='${toolbarName}']`);
-        var icons = toolbar.querySelector("titanium-toolbar-icons");
-        return icons
+        let toolbar: any = this.querySelector(`[name='${toolbarName}']`);
+        let icons = toolbar.querySelector('titanium-toolbar-icons');
+        return icons;
 
     }
 
     showToolbar(name: string) {
         this.activeToolbarName = name;
-        if (name === "search") {
+        if (name === 'search') {
             let options: any = { bubbles: true, composed: true };
             this.dispatchEvent(new CustomEvent('searchActivated', options));
         }
@@ -78,6 +78,6 @@ class TitanimToolbarManager extends Polymer.Element {
 
     reset() {
         //this.showToolbar('main');
-        this.searchTerm = "";
+        this.searchTerm = '';
     }
 }

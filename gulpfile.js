@@ -34,7 +34,8 @@ gulp.task('polymerServe', function (done) {
 
 gulp.task('browser-sync', function () {
     browserSync.init({
-        proxy: "localhost:8000"
+        proxy: "localhost:8000",
+        startPath: "/components/titanium-toolbar-manager/demo/index.html"
     });
 });
 

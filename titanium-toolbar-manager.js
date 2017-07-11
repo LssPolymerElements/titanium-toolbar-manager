@@ -7,16 +7,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-let TitanimToolbarManager = class TitanimToolbarManager extends Polymer.Element {
+let TitaniumToolbarManager = class TitaniumToolbarManager extends Polymer.Element {
     constructor() {
         super(...arguments);
-        this.toolbarNames = ["main", "search", "selected", "detail"];
+        this.toolbarNames = ['main', 'search', 'selected', 'detail'];
     }
     onToolbarTapped(e) {
         let action = e.detail.sourceEvent.target.action
-            || e.detail.sourceEvent.target.getAttribute("action")
+            || e.detail.sourceEvent.target.getAttribute('action')
             || (e.detail.sourceEvent.target.parentElement && e.detail.sourceEvent.target.parentElement.action)
-            || (e.detail.sourceEvent.target.parentElement && e.detail.sourceEvent.target.parentElement.getAttribute("action"));
+            || (e.detail.sourceEvent.target.parentElement && e.detail.sourceEvent.target.parentElement.getAttribute('action'));
         if (!action) {
             return;
         }
@@ -24,7 +24,7 @@ let TitanimToolbarManager = class TitanimToolbarManager extends Polymer.Element 
         this.dispatchEvent(new CustomEvent(`${action}Tap`, options));
     }
     addIcon(toolbarName, icon, position) {
-        var icons = this.getToolbarIcons(toolbarName);
+        let icons = this.getToolbarIcons(toolbarName);
         if (icons) {
             icons.addIcon(icon, position);
         }
@@ -33,7 +33,7 @@ let TitanimToolbarManager = class TitanimToolbarManager extends Polymer.Element 
         }
     }
     removeIcon(toolbarName, name) {
-        var icons = this.getToolbarIcons(toolbarName);
+        let icons = this.getToolbarIcons(toolbarName);
         if (icons) {
             icons.removeIcon(name);
         }
@@ -46,56 +46,56 @@ let TitanimToolbarManager = class TitanimToolbarManager extends Polymer.Element 
             console.warn(`no ${toolbarName} toolbar found`);
             return null;
         }
-        var toolbar = this.querySelector(`[name='${toolbarName}']`);
-        var icons = toolbar.querySelector("titanium-toolbar-icons");
+        let toolbar = this.querySelector(`[name='${toolbarName}']`);
+        let icons = toolbar.querySelector('titanium-toolbar-icons');
         return icons;
     }
     showToolbar(name) {
         this.activeToolbarName = name;
-        if (name === "search") {
+        if (name === 'search') {
             let options = { bubbles: true, composed: true };
             this.dispatchEvent(new CustomEvent('searchActivated', options));
         }
     }
     reset() {
         //this.showToolbar('main');
-        this.searchTerm = "";
+        this.searchTerm = '';
     }
 };
 __decorate([
     property(),
     __metadata("design:type", Element)
-], TitanimToolbarManager.prototype, "mainToolbar", void 0);
+], TitaniumToolbarManager.prototype, "mainToolbar", void 0);
 __decorate([
     property(),
     __metadata("design:type", Element)
-], TitanimToolbarManager.prototype, "searchToolbar", void 0);
+], TitaniumToolbarManager.prototype, "searchToolbar", void 0);
 __decorate([
     property(),
     __metadata("design:type", Element)
-], TitanimToolbarManager.prototype, "selectedToolbar", void 0);
+], TitaniumToolbarManager.prototype, "selectedToolbar", void 0);
 __decorate([
     property(),
     __metadata("design:type", Element)
-], TitanimToolbarManager.prototype, "detailToolbar", void 0);
+], TitaniumToolbarManager.prototype, "detailToolbar", void 0);
 __decorate([
     property(),
     __metadata("design:type", String)
-], TitanimToolbarManager.prototype, "activeToolbarName", void 0);
+], TitaniumToolbarManager.prototype, "activeToolbarName", void 0);
 __decorate([
     property(),
     __metadata("design:type", String)
-], TitanimToolbarManager.prototype, "searchTerm", void 0);
+], TitaniumToolbarManager.prototype, "searchTerm", void 0);
 __decorate([
     property({ readOnly: true }),
     __metadata("design:type", Array)
-], TitanimToolbarManager.prototype, "toolbarNames", void 0);
+], TitaniumToolbarManager.prototype, "toolbarNames", void 0);
 __decorate([
     listen('tap', 'pages'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], TitanimToolbarManager.prototype, "onToolbarTapped", null);
-TitanimToolbarManager = __decorate([
-    customElement("titanium-toolbar-manager")
-], TitanimToolbarManager);
+], TitaniumToolbarManager.prototype, "onToolbarTapped", null);
+TitaniumToolbarManager = __decorate([
+    customElement('titanium-toolbar-manager')
+], TitaniumToolbarManager);

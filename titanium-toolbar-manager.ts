@@ -23,6 +23,9 @@ class TitaniumToolbarManager extends Polymer.Element {
     @property({ readOnly: true })
     private toolbarNames: Array<string> = ['main', 'search', 'selected', 'detail'];
 
+    @property({ notify: true })
+    selectedCount: number;
+
     @listen('tap', 'pages')
     onToolbarTapped(e: any) {
         let action = e.detail.sourceEvent.target.action

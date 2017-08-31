@@ -91,6 +91,10 @@ __decorate([
     __metadata("design:type", Array)
 ], TitaniumToolbarManager.prototype, "toolbarNames", void 0);
 __decorate([
+    property({ notify: true }),
+    __metadata("design:type", Number)
+], TitaniumToolbarManager.prototype, "selectedCount", void 0);
+__decorate([
     listen('tap', 'pages'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),

@@ -28,10 +28,10 @@ class TitaniumToolbarManager extends Polymer.Element {
 
     @listen('tap', 'pages')
     onToolbarTapped(e: any) {
-        let action = e.detail.sourceEvent.target.action
-            || e.detail.sourceEvent.target.getAttribute('action')
-            || (e.detail.sourceEvent.target.parentElement && e.detail.sourceEvent.target.parentElement.action)
-            || (e.detail.sourceEvent.target.parentElement && e.detail.sourceEvent.target.parentElement.getAttribute('action'));
+        let action = e.target.action
+            || e.target.getAttribute('action')
+            || (e.target.parentElement && e.target.parentElement.action)
+            || (e.target.parentElement && e.target.parentElement.getAttribute('action'));
 
         if (!action) {
             return;

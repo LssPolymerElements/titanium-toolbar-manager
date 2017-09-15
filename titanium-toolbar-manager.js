@@ -13,10 +13,10 @@ let TitaniumToolbarManager = class TitaniumToolbarManager extends Polymer.Elemen
         this.toolbarNames = ['main', 'search', 'selected', 'detail'];
     }
     onToolbarTapped(e) {
-        let action = e.detail.sourceEvent.target.action
-            || e.detail.sourceEvent.target.getAttribute('action')
-            || (e.detail.sourceEvent.target.parentElement && e.detail.sourceEvent.target.parentElement.action)
-            || (e.detail.sourceEvent.target.parentElement && e.detail.sourceEvent.target.parentElement.getAttribute('action'));
+        let action = e.target.action
+            || e.target.getAttribute('action')
+            || (e.target.parentElement && e.target.parentElement.action)
+            || (e.target.parentElement && e.target.parentElement.getAttribute('action'));
         if (!action) {
             return;
         }

@@ -13,13 +13,18 @@
             }
         </style>
         <iron-pages id="pages" selected="[[activeToolbarName]]" attr-for-selected="name">
-            <slot name="main"></slot>
-
-            <slot name="search"></slot>
-
-            <slot name="selected"></slot>
-
-            <slot name="detail"></slot>
+            <div name="main">
+                <slot name="main"></slot>
+            </div>
+            <div name="search">
+                <slot name="search"></slot>
+            </div>
+            <div name="selected">
+                <slot name="selected"></slot>
+            </div>
+            <div name="detail">
+                <slot name="detail"></slot>
+            </div>
         </iron-pages>
     </template>
     <script src="./titanium-toolbar-manager.js"></script>
